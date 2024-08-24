@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "24489428835",
+    "project_id": "e-commerce-adminpannel",
+    "storage_bucket": "e-commerce-adminpannel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24489428835:android:4096fb0824f63be8feb556",
+        "android_client_info": {
+          "package_name": "com.example.adminpanelapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHEOHbMpcAMiL3-PkmuU02PFsSW9jKd4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
