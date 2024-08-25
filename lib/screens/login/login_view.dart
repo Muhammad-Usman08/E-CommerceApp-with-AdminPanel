@@ -2,7 +2,6 @@
 
 import 'package:adminpanelapp/components/button/button.dart';
 import 'package:adminpanelapp/components/loginField/loginfield.dart';
-import 'package:adminpanelapp/screens/admin/admin_view.dart';
 import 'package:adminpanelapp/screens/adminlogin/adminlogin_view.dart';
 import 'package:adminpanelapp/screens/home/home_view.dart';
 import 'package:adminpanelapp/screens/signup/signup_view.dart';
@@ -38,8 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
           email: emailController.text, password: passwordController.text);
 
       if (credential.user != null) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       } else if (credential.user == null) {
         print('User Not Found');
       } else {

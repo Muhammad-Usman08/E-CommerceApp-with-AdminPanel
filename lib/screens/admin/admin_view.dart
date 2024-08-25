@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:adminpanelapp/components/button/button.dart';
 import 'package:adminpanelapp/components/loginField/loginfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,17 +15,15 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
-  //controllers
+//controllers
   TextEditingController productName = TextEditingController();
-
   TextEditingController productPrice = TextEditingController();
+  TextEditingController productDescription = TextEditingController();
 
   File? imageFile;
-
   String? imageUrl;
 
   final storage = FirebaseStorage.instance.ref();
-
   CollectionReference firestore =
       FirebaseFirestore.instance.collection('products');
 
@@ -39,8 +36,10 @@ class _AdminScreenState extends State<AdminScreen> {
       });
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Image Added')));
+
+      // Await the sendImageToStorage function
+      await sendImageToStorage(imageFile!);
     }
-    sendImageToStorage(imageFile!);
   }
 
   sendImageToStorage(File uploadFile) async {
@@ -52,17 +51,21 @@ class _AdminScreenState extends State<AdminScreen> {
 
   addProducts() async {
     if (imageUrl != null) {
-      await firestore.add(
-        {
+      try {
+        await firestore.add({
           'productName': productName.text,
           'productPrice': productPrice.text,
+          'productDescription': productDescription.text,
           'productImage': imageUrl,
-        },
-      );
-      productName.clear();
-      productPrice.clear();
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Product Added Successfully')));
+        });
+        productName.clear();
+        productPrice.clear();
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Product Added Successfully')));
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Error: $e')));
+      }
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Please Select Image')));
@@ -109,6 +112,11 @@ class _AdminScreenState extends State<AdminScreen> {
                     controller: productPrice,
                     title: 'Product Price',
                     fieldName: 'Enter Product Price'),
+                LoginField(
+                  controller: productDescription,
+                  title: 'Product Description',
+                  fieldName: 'Enter Product Description',
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: 30),
                   child: Button(

@@ -1,6 +1,7 @@
 import 'package:adminpanelapp/firebase_options.dart';
-import 'package:adminpanelapp/screens/admin/admin_view.dart';
-import 'package:adminpanelapp/screens/splash/splash_screen.dart';
+import 'package:adminpanelapp/screens/home/home.dart';
+import 'package:adminpanelapp/screens/home/home_view.dart';
+import 'package:adminpanelapp/screens/profile/profile_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomeView(),
     );
   }
 }
