@@ -1,5 +1,7 @@
 import 'package:adminpanelapp/components/heading/heading.dart';
+import 'package:adminpanelapp/list.dart';
 import 'package:adminpanelapp/screens/home/widget/categories.dart';
+import 'package:adminpanelapp/screens/products/product_detail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -216,9 +218,16 @@ class HomeScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
-                        var product = snapshot.data!.docs[index];
+                        items.add(snapshot.data!.docs[index]);
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetail(
+                                          index: index,
+                                        )));
+                          },
                           child: Container(
                             height: 1000,
                             decoration: BoxDecoration(
@@ -238,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                                 Container(
                                   margin: const EdgeInsets.only(bottom: 8),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xffeeeef0),
+                                    color: const Color(0xfff7f7f7),
                                     borderRadius: BorderRadius.circular(17),
                                   ),
                                   height:
@@ -248,12 +257,13 @@ class HomeScreen extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(17),
                                     child: Image.network(
-                                      product['productImage'] ?? '',
-                                      fit: BoxFit.cover,
+                                      items[index]['productImage'] ?? '',
+                                      width: 50,
                                       loadingBuilder:
                                           (context, child, loadingProgress) {
-                                        if (loadingProgress == null)
+                                        if (loadingProgress == null) {
                                           return child;
+                                        }
                                         return const Center(
                                           child: CircularProgressIndicator(),
                                         );
@@ -270,7 +280,7 @@ class HomeScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          product['productName'] ??
+                                          items[index]['productName'] ??
                                               'Unnamed Product',
                                           style: const TextStyle(
                                             fontSize: 14,
@@ -279,7 +289,8 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 5),
                                         Text(
-                                          product['productDescription'] ?? '',
+                                          items[index]['productDescription'] ??
+                                              '',
                                           style: const TextStyle(
                                             fontSize: 14,
                                             color: Colors.grey,
@@ -287,7 +298,7 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 10),
                                         Text(
-                                          product['productPrice'] ?? '',
+                                          'Rs.${items[index]['productPrice']}',
                                           style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -304,7 +315,12 @@ class HomeScreen extends StatelessWidget {
                       },
                     );
                   } else {
-                    return const Center(child: Text('No Products Found'));
+                    return Center(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 50),
+                        child: const Text('No Products Found.'),
+                      ),
+                    );
                   }
                 },
               ),

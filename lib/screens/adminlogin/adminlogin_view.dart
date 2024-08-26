@@ -5,23 +5,34 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class AdminLogin extends StatelessWidget {
-  AdminLogin({super.key});
+class AdminLogin extends StatefulWidget {
+  const AdminLogin({super.key});
 
+  @override
+  State<AdminLogin> createState() => _AdminLoginState();
+}
+
+class _AdminLoginState extends State<AdminLogin> {
   //controllers
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   bool isLoading = false;
+
   FirebaseAuth auth = FirebaseAuth.instance;
 
   adminLogin(context) async {
+    setState(() {
+      isLoading = true;
+    });
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       //Condition
       if (credential.user?.email == 'usman2037966@gmail.com') {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => AdminScreen()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const AdminScreen()));
       }
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -76,7 +87,7 @@ class AdminLogin extends StatelessWidget {
                         adminLogin(context);
                       },
                       height: 45,
-                      color: const Color(0xffAA14F0),
+                      color: const Color(0xff4157FF),
                       width: 400,
                       buttonText: isLoading
                           ? const CircularProgressIndicator(

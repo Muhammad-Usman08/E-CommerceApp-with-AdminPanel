@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
 import 'dart:io';
 import 'package:adminpanelapp/components/button/button.dart';
 import 'package:adminpanelapp/components/loginField/loginfield.dart';
+import 'package:adminpanelapp/screens/login/login_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,6 +29,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final storage = FirebaseStorage.instance.ref();
   CollectionReference firestore =
       FirebaseFirestore.instance.collection('products');
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   selectImage() async {
     final ImagePicker picker = ImagePicker();
@@ -60,6 +64,7 @@ class _AdminScreenState extends State<AdminScreen> {
         });
         productName.clear();
         productPrice.clear();
+        productDescription.clear();
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Product Added Successfully')));
       } catch (e) {
@@ -81,6 +86,19 @@ class _AdminScreenState extends State<AdminScreen> {
           'Admin Panel',
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              auth.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -101,7 +119,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                     height: 40,
                     width: 220,
-                    color: const Color(0xffAA14F0),
+                    color: const Color(0xff4157FF),
                   ),
                 ),
                 LoginField(
@@ -129,7 +147,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                     height: 40,
                     width: 130,
-                    color: const Color(0xffAA14F0),
+                    color: const Color(0xff4157FF),
                   ),
                 ),
               ],

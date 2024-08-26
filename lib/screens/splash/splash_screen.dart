@@ -15,15 +15,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const SignUpScreen()));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white54,
+      backgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 40),
         child: Center(

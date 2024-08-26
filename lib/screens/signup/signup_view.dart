@@ -2,7 +2,7 @@
 
 import 'package:adminpanelapp/components/button/button.dart';
 import 'package:adminpanelapp/components/loginField/loginfield.dart';
-import 'package:adminpanelapp/screens/home/home_view.dart';
+import 'package:adminpanelapp/screens/home/home.dart';
 import 'package:adminpanelapp/screens/login/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         password: passwordController.text,
       );
       if (credential.user != null) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomeView()));
       } else if (credential.user == null) {
         print('user Not found');
       } else {
@@ -101,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Button(
                       width: 400,
                       height: 45,
-                      color: const Color(0xffAA14F0),
+                      color: const Color(0xff4157FF),
                       buttonText: isLoading
                           ? const CircularProgressIndicator(
                               valueColor:

@@ -3,6 +3,7 @@
 import 'package:adminpanelapp/components/button/button.dart';
 import 'package:adminpanelapp/components/loginField/loginfield.dart';
 import 'package:adminpanelapp/screens/adminlogin/adminlogin_view.dart';
+import 'package:adminpanelapp/screens/home/home.dart';
 import 'package:adminpanelapp/screens/home/home_view.dart';
 import 'package:adminpanelapp/screens/signup/signup_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (credential.user != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const HomeView()));
       } else if (credential.user == null) {
         print('User Not Found');
       } else {
@@ -65,17 +66,28 @@ class _LoginScreenState extends State<LoginScreen> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 30),
-            child: Button(
-              onpressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AdminLogin()));
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AdminLogin()));
               },
-              width: 150,
-              height: 40,
-              color: Colors.grey[300],
-              buttonText: const Text(
-                'Admin Login',
-                style: TextStyle(color: Colors.black),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: const Text(
+                      'Admin Login',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const Icon(
+                    Icons.login,
+                    color: Colors.white,
+                  ),
+                ],
               ),
             ),
           ),
@@ -116,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         signIn(context);
                       },
                       height: 45,
-                      color: const Color(0xffAA14F0),
+                      color: const Color(0xff4157FF),
                       width: 400,
                       buttonText: isLoading
                           ? const CircularProgressIndicator(
