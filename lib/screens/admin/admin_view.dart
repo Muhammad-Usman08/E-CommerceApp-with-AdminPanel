@@ -81,7 +81,7 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[300],
+        backgroundColor: const Color(0xff4157FF),
         title: const Text(
           'Admin Panel',
           style: TextStyle(color: Colors.white),
@@ -119,7 +119,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                     height: 40,
                     width: 220,
-                    color: const Color(0xff4157FF),
+                    color: Colors.blue[700],
                   ),
                 ),
                 LoginField(
@@ -147,7 +147,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                     height: 40,
                     width: 130,
-                    color: const Color(0xff4157FF),
+                    color: Colors.blue[700],
                   ),
                 ),
               ],

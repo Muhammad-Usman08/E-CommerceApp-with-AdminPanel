@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[300],
+        backgroundColor: const Color(0xff4157FF),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 30),
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         signIn(context);
                       },
                       height: 45,
-                      color: const Color(0xff4157FF),
+                      color: Colors.blue[700],
                       width: 400,
                       buttonText: isLoading
                           ? const CircularProgressIndicator(

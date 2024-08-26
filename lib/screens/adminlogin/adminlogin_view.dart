@@ -46,7 +46,7 @@ class _AdminLoginState extends State<AdminLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[300],
+        backgroundColor: const Color(0xff4157FF),
         title: const Text(
           'Admin Login',
           style: TextStyle(color: Colors.white),
@@ -87,7 +87,7 @@ class _AdminLoginState extends State<AdminLogin> {
                         adminLogin(context);
                       },
                       height: 45,
-                      color: const Color(0xff4157FF),
+                      color: Colors.blue[700],
                       width: 400,
                       buttonText: isLoading
                           ? const CircularProgressIndicator(

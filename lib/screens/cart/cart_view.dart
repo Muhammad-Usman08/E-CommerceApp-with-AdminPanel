@@ -90,6 +90,7 @@ class _CartScreenState extends State<CartScreen> {
         .then((value) => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const CheckOutScreen())))
         .catchError((error) {
+          // ignore: avoid_print
           print(error);
         });
   }
@@ -153,6 +154,12 @@ class _CartScreenState extends State<CartScreen> {
                 itemCount: selectedItems.length,
                 itemBuilder: (context, index) {
                   return Container(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 5, right: 20, bottom: 10),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 237, 235, 235),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     margin: const EdgeInsets.only(bottom: 15),
                     child: Column(
                       children: [
@@ -164,7 +171,7 @@ class _CartScreenState extends State<CartScreen> {
                               height: 90,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: Color(0xfff7f7f7),
+                                color: const Color(0xfff7f7f7),
                               ),
                               child: Image.network(
                                   '${selectedItems[index]['productImage']}'),
@@ -196,7 +203,9 @@ class _CartScreenState extends State<CartScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    deleteItem(index);
+                                  },
                                   icon: Icon(
                                     Icons.cancel_outlined,
                                     color: Colors.grey[500],
@@ -206,8 +215,8 @@ class _CartScreenState extends State<CartScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 0),
                                   decoration: BoxDecoration(
-                                    color: Colors.blue[600],
-                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.blue[400],
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Row(
                                     children: [
@@ -236,7 +245,7 @@ class _CartScreenState extends State<CartScreen> {
                                         },
                                         child: const Text(
                                           '-',
-                                          style: TextStyle(fontSize: 40),
+                                          style: TextStyle(fontSize: 30),
                                         ),
                                       ),
                                     ],
@@ -245,13 +254,6 @@ class _CartScreenState extends State<CartScreen> {
                               ],
                             ),
                           ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Divider(
-                            color: Colors.grey[300],
-                            thickness: 1,
-                          ),
                         ),
                       ],
                     ),
